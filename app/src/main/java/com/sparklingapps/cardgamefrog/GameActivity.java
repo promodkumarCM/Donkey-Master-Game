@@ -85,8 +85,14 @@ public class GameActivity extends AppCompatActivity implements SocketNetworkInte
                 ArrayList<Card> currentPlayedCard = new ArrayList<>();
                 currentPlayedCard.add(selectedCardObj);
 
-                String roundPlayedJson =playerObjFromServer.toString();
-                Log.d(TAG, "onClick: ");
+                Player roundPlay;
+                roundPlay = playerObjFromServer;
+                roundPlay.setCard(currentPlayedCard);
+
+                Gson gson = new Gson();
+                String roundPlayedJson = gson.toJson(roundPlay);
+
+
 
 
             }

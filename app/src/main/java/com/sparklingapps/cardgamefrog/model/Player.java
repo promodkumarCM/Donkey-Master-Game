@@ -106,10 +106,4 @@ public class Player {
         this.position = position;
     }
 
-
-    @NonNull
-    @Override
-    public String toString() {
-        return new GsonBuilder().create().toJson(this, Player.class);
-    }
 }
