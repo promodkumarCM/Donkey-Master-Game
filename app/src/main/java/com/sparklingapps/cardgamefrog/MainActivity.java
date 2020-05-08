@@ -13,6 +13,7 @@ import com.sparklingapps.cardgamefrog.model.Room;
 import com.sparklingapps.cardgamefrog.socket.SocketConstants;
 import com.sparklingapps.cardgamefrog.socket.SocketNetworkManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,8 +30,8 @@ public class MainActivity extends AppCompatActivity implements SocketNetworkInte
     private SocketNetworkManager socketConnection;
     private static final String TAG = "MainActivity";
     private Socket socket;
-
     private Room roomId;
+
 
 
     @Override
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements SocketNetworkInte
 
                 Player playerObj = new Player();
                 playerObj.setName("BASIL");
-                playerObj.setMyTurn(false);
+                playerObj.setIsMyTurn(false);
                 playerObj.setType("admin");
 
                 CreateRoom roomObj = new CreateRoom();
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements SocketNetworkInte
 
                 Player playerObj = new Player();
                 playerObj.setName("PROMOD");
-                playerObj.setMyTurn(false);
+                playerObj.setIsMyTurn(false);
                 playerObj.setType("USER");
 
                 EditText text = findViewById(R.id.room_id);
@@ -83,21 +84,25 @@ public class MainActivity extends AppCompatActivity implements SocketNetworkInte
                 Gson gson = new Gson();
                 String joinrequest = gson.toJson(joinRoom);
                 socketConnection.registerEventListenerHandler(SocketConstants.NOTIFY_PLAYER_JOIN);
+                socketConnection.registerEventListenerHandler(SocketConstants.STARTED_GAME);
                 socketConnection.sendDataToServer(SocketConstants.PLAYER_JOIN,joinrequest);
 
             }
         });
 
 
-        Button btnStart = findViewById(R.id.btn_start);
+        final Button btnStart = findViewById(R.id.btn_start);
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                btnStart.setEnabled(false);
                 Gson gson = new Gson();
                 String test = gson.toJson(roomId);
                 socketConnection.registerEventListenerHandler(SocketConstants.ADD_CARD);
+                socketConnection.registerEventListenerHandler(SocketConstants.STARTED_GAME);
                 socketConnection.sendDataToServer(SocketConstants.START_GAME,test);
+
 
 
             }
@@ -138,11 +143,7 @@ public class MainActivity extends AppCompatActivity implements SocketNetworkInte
     public void onAfterGameCreated(String responseMsg) {
         Gson gson = new Gson();
         Room room = gson.fromJson(responseMsg,Room.class);
-
         roomId = room;
-
-
-
         Log.d(TAG, "onAfterGameCreated: "+room.getRoomId());
 
     }
@@ -160,9 +161,18 @@ public class MainActivity extends AppCompatActivity implements SocketNetworkInte
     }
 
     @Override
-    public void addCardToPlayerHand(String responseMsg) {
+    public void addCardToPlayerHand(final String responseMsg) {
 
         Log.d(TAG, "addCardToPlayerHand: "+responseMsg);
+
+    }
+
+    @Override
+    public void onGameStarted(String responseMsg) {
+
+        Intent intent = new Intent(MainActivity.this,GameActivity.class);
+        intent.putExtra("playerJson",responseMsg);
+        startActivity(intent);
 
     }
 

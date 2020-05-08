@@ -202,7 +202,9 @@ public class SocketNetworkManager {
                         case SocketConstants.ADD_CARD:
                             mSocket.on(methodOnServer,addCardsToHandListener);
                             break;
-
+                        case SocketConstants.STARTED_GAME:
+                            mSocket.on(methodOnServer,onGameStartedListener);
+                            break;
 
 
                     }
@@ -373,10 +375,17 @@ public class SocketNetworkManager {
     private Emitter.Listener addCardsToHandListener = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            mNetworkInterface.notifyPlayerJoin(args[0].toString());
+
+            mNetworkInterface.addCardToPlayerHand(args[0].toString());
         }
     };
 
+    private Emitter.Listener onGameStartedListener = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            mNetworkInterface.onGameStarted(args[0].toString());
+        }
+    };
 
 
     private SocketNetworkInterface getSocketNetworkInterface() {

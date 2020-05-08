@@ -1,5 +1,9 @@
 package com.sparklingapps.cardgamefrog.socket;
 
+import com.sparklingapps.cardgamefrog.model.Player;
+
+import java.util.ArrayList;
+
 public class SocketConstants {
     public static final String ON_CONNECTION = "on_connection";
     public static final String PLAYER_TURN = "PLAYER_TURN";
@@ -15,9 +19,14 @@ public class SocketConstants {
     public static final String NEW_MESSAGE = "NEW_MESSAGE";
     public static final String NOTIFY_PLAYER_JOIN = "NOTIFY_PLAYER_JOIN";
     public static final String START_GAME = "START_GAME";
+    public static final String STARTED_GAME ="STARTED_GAME";
 
 
     public static final String ADD_CARD = "ADD_CARD";
+
+
+
+
 
 
 

@@ -1,34 +1,60 @@
 package com.sparklingapps.cardgamefrog.model;
 
-import com.sparklingapps.cardgamefrog.enums.Suit;
-import com.sparklingapps.cardgamefrog.enums.Values;
+import android.graphics.drawable.Drawable;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Card {
 
-    private Suit suit;
-    private Values values;
+    @SerializedName("Value")
+    @Expose
+    private String value;
+    @SerializedName("Suit")
+    @Expose
+    private String suit;
 
+    private Drawable cardFront;
+
+    /**
+     * No args constructor for use in serialization
+     *
+     */
     public Card() {
     }
 
-    public Card(Suit suit, Values values) {
-        this.values = values;
+    /**
+     *
+     * @param suit
+     * @param value
+     */
+    public Card(String value, String suit) {
+        super();
+        this.value = value;
         this.suit = suit;
     }
 
-    public Suit getSuit() {
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getSuit() {
         return suit;
     }
 
-    public void setSuit(Suit suit) {
+    public void setSuit(String suit) {
         this.suit = suit;
     }
 
-    public Values getValues() {
-        return values;
+    public Drawable getCardFront() {
+        return cardFront;
     }
 
-    public void setValues(Values values) {
-        this.values = values;
+    public void setCardFront(Drawable cardFront) {
+        this.cardFront = cardFront;
     }
+
 }

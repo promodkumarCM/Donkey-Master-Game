@@ -19,4 +19,6 @@ public interface SocketNetworkInterface {
 
     void addCardToPlayerHand(String responseMsg);
 
+    void onGameStarted(String responseMsg);
+
 }
