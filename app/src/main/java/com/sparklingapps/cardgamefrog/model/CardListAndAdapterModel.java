@@ -6,19 +6,19 @@ import java.util.ArrayList;
 
 public class CardListAndAdapterModel {
 
-    private ArrayList<Card> mCardList;
+    private ArrayList<Integer> mCardList;
     private MyCardAdapter mAdapter;
 
-    public CardListAndAdapterModel(ArrayList<Card> mCardList, MyCardAdapter mAdapter) {
+    public CardListAndAdapterModel(ArrayList<Integer> mCardList, MyCardAdapter mAdapter) {
         this.mCardList = mCardList;
         this.mAdapter = mAdapter;
     }
 
-    public ArrayList<Card> getmCardList() {
+    public ArrayList<Integer> getmCardList() {
         return mCardList;
     }
 
-    public void setmCardList(ArrayList<Card> mCardList) {
+    public void setmCardList(ArrayList<Integer> mCardList) {
         this.mCardList = mCardList;
     }
 

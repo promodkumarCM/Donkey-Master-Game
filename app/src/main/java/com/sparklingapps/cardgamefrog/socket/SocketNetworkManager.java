@@ -205,8 +205,16 @@ public class SocketNetworkManager {
                         case SocketConstants.STARTED_GAME:
                             mSocket.on(methodOnServer,onGameStartedListener);
                             break;
+                        case SocketConstants.ADD_CARD_TABLE:
+                            mSocket.on(methodOnServer,addCardToTableListener);
+                            break;
 
-
+                        case SocketConstants.CLEAR_TABLE:
+                            mSocket.on(methodOnServer,clearTableListener);
+                            break;
+                        case SocketConstants.TURN_UPDATE:
+                            mSocket.on(methodOnServer,onUpdateTurn);
+                            break;
                     }
 
                 }
@@ -361,6 +369,7 @@ public class SocketNetworkManager {
     private Emitter.Listener onAfterGameCreatedListener = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
+            mNetworkInterface = getSocketNetworkInterface();
             mNetworkInterface.onAfterGameCreated(args[0].toString());
         }
     };
@@ -368,6 +377,8 @@ public class SocketNetworkManager {
     private Emitter.Listener notifyPlayerJoinListener = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
+
+            mNetworkInterface = getSocketNetworkInterface();
             mNetworkInterface.notifyPlayerJoin(args[0].toString());
         }
     };
@@ -375,7 +386,7 @@ public class SocketNetworkManager {
     private Emitter.Listener addCardsToHandListener = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-
+            mNetworkInterface = getSocketNetworkInterface();
             mNetworkInterface.addCardToPlayerHand(args[0].toString());
         }
     };
@@ -383,10 +394,39 @@ public class SocketNetworkManager {
     private Emitter.Listener onGameStartedListener = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
+            mNetworkInterface = getSocketNetworkInterface();
             mNetworkInterface.onGameStarted(args[0].toString());
         }
     };
 
+    private Emitter.Listener addCardToTableListener = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            mNetworkInterface = getSocketNetworkInterface();
+            Log.d(TAG, "call: addCardToTable" +args[0].toString());
+            mNetworkInterface.addCardToTable(args[0].toString());
+        }
+    };
+
+
+
+    private Emitter.Listener clearTableListener = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            mNetworkInterface = getSocketNetworkInterface();
+            mNetworkInterface.onClearTable(args[0].toString());
+        }
+    };
+
+
+    private Emitter.Listener onUpdateTurn = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            mNetworkInterface = getSocketNetworkInterface();
+            Log.d(TAG, "call: "+args[0]);
+            mNetworkInterface.updateTurn((boolean)args[0]);
+        }
+    };
 
     private SocketNetworkInterface getSocketNetworkInterface() {
 
@@ -397,7 +437,6 @@ public class SocketNetworkManager {
 
         if( size > -1) {
             SocketNetworkInterface socketNetworkInterface = socketNetworkInterfaces.get(size);
-
           //  Log.e("test", "idiot... getSocketNetworkInterface  " +  size + "  currently using " + socketNetworkInterface) ;
             return socketNetworkInterface;
         }

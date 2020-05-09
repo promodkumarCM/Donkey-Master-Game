@@ -12,6 +12,7 @@ import com.sparklingapps.cardgamefrog.model.Player;
 import com.sparklingapps.cardgamefrog.model.Room;
 import com.sparklingapps.cardgamefrog.socket.SocketConstants;
 import com.sparklingapps.cardgamefrog.socket.SocketNetworkManager;
+import com.sparklingapps.cardgamefrog.utils.BaseActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +26,7 @@ import java.util.Random;
 
 import io.socket.client.Socket;
 
-public class MainActivity extends AppCompatActivity implements SocketNetworkInterface {
+public class MainActivity extends BaseActivity implements SocketNetworkInterface {
     //socket connection variables
     private SocketNetworkManager socketConnection;
     private static final String TAG = "MainActivity";
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements SocketNetworkInte
         }
         socketConnection.addSocketNetworkInterface(this);
         socketConnection.registerEventListenerHandler(SocketConstants.ON_CONNECTION);
+
     }
 
     @Override
@@ -168,11 +170,28 @@ public class MainActivity extends AppCompatActivity implements SocketNetworkInte
     }
 
     @Override
+    public void addCardToTable(String responseMsg) {
+
+        Log.d(TAG, "addCardToTable: "+responseMsg);
+    }
+
+    @Override
     public void onGameStarted(String responseMsg) {
 
         Intent intent = new Intent(MainActivity.this,GameActivity.class);
         intent.putExtra("playerJson",responseMsg);
+        SocketNetworkManager.removeSocketNetworkInterface(this);
         startActivity(intent);
+
+    }
+
+    @Override
+    public void onClearTable(String responseMsg) {
+
+    }
+
+    @Override
+    public void updateTurn(boolean myTurn) {
 
     }
 

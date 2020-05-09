@@ -13,12 +13,41 @@
         android:layout_height="0dp"
         android:layout_weight="0.5">
 
+        <FrameLayout
+            android:background="@drawable/table_background"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/iv_selectedCard"
-            android:layout_width="100dp"
-            android:layout_height="150dp">
-        </ImageView>
+            <ImageView
+                android:id="@+id/iv_selectedCard"
+                android:layout_width="80dp"
+                android:layout_height="100dp">
+            </ImageView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_margin="20dp"
+                android:id="@+id/rv_table_deck_cards"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:textColor="@color/design_default_color_background"
+                android:layout_gravity="bottom|center_horizontal"
+                android:id="@+id/table_msg"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_marginBottom="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+
+
+        </FrameLayout>
 
 
     </FrameLayout>
@@ -27,6 +56,7 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/design_default_color_secondary_variant"
         android:layout_weight="1">
 
         <LinearLayout
@@ -67,21 +97,7 @@
     </FrameLayout>
 
 
-    <FrameLayout
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_deck_cards"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-
-    </FrameLayout>
 
     <Button
         android:id="@+id/btn_deal"

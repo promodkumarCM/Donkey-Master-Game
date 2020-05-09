@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class SocketConstants {
     public static final String ON_CONNECTION = "on_connection";
-    public static final String PLAYER_TURN = "PLAYER_TURN";
+    public static final String TURN_UPDATE = "TURN_UPDATE";
     public static final String PLAYER_WON = "PLAYER_WON";
     public static final String PLAYER_FAILED = "PLAYER_FAILED";
     public static final String PLAYER_JOIN = "PLAYER_JOIN";
@@ -21,8 +21,14 @@ public class SocketConstants {
     public static final String START_GAME = "START_GAME";
     public static final String STARTED_GAME ="STARTED_GAME";
 
+    public static final String TABLE_ROUND ="TABLE_ROUND";
 
     public static final String ADD_CARD = "ADD_CARD";
+
+    public static final String ADD_CARD_TABLE = "ADD_CARD_TABLE";
+    public static final String CLEAR_TABLE = "CLEAR_TABLE";
+
+
 
 
 

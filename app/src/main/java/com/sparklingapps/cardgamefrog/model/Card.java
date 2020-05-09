@@ -6,55 +6,15 @@ import com.google.gson.annotations.SerializedName;
 
 public class Card {
 
-    @SerializedName("Value")
+    @SerializedName("id")
     @Expose
-    private String value;
-    @SerializedName("Suit")
-    @Expose
-    private String suit;
+    private String id;
 
-    private Drawable cardFront;
-
-    /**
-     * No args constructor for use in serialization
-     *
-     */
-    public Card() {
+    public String getId() {
+        return id;
     }
 
-    /**
-     *
-     * @param suit
-     * @param value
-     */
-    public Card(String value, String suit) {
-        super();
-        this.value = value;
-        this.suit = suit;
+    public void setId(String id) {
+        this.id = id;
     }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public String getSuit() {
-        return suit;
-    }
-
-    public void setSuit(String suit) {
-        this.suit = suit;
-    }
-
-    public Drawable getCardFront() {
-        return cardFront;
-    }
-
-    public void setCardFront(Drawable cardFront) {
-        this.cardFront = cardFront;
-    }
-
 }

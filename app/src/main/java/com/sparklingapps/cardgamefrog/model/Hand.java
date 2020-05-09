@@ -2,24 +2,22 @@ package com.sparklingapps.cardgamefrog.model;
 
 import android.content.Context;
 
-import androidx.core.content.ContextCompat;
-
-import com.sparklingapps.cardgamefrog.R;
+import com.sparklingapps.cardgamefrog.enums.Cards;
 import com.sparklingapps.cardgamefrog.enums.Suit;
 
 import java.util.ArrayList;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Hand {
 
-    private ArrayList<Card> cardsInHand;
-    private ArrayList<Card> clubsCardInHand;
-    private ArrayList<Card> diamondsCardInHand;
-    private ArrayList<Card> heartsCardInHand;
-    private ArrayList<Card> spadesCardInHand;
+    private ArrayList<Integer> temp;
+    private ArrayList<Integer> cardsInHand;
+    private ArrayList<Integer> clubsCardInHand;
+    private ArrayList<Integer> diamondsCardInHand;
+    private ArrayList<Integer> heartsCardInHand;
+    private ArrayList<Integer> spadesCardInHand;
 
     public Hand() {
+        temp = new ArrayList<>();
         cardsInHand = new ArrayList<>();
         clubsCardInHand = new ArrayList<>();
         diamondsCardInHand = new ArrayList<>();
@@ -27,39 +25,54 @@ public class Hand {
         spadesCardInHand = new ArrayList<>();
     }
 
-    public void buildHand(ArrayList<Card> card, Context context) {
-        this.cardsInHand.addAll(card);
-        setCardFront(context);
+    public void clearAllSuits() {
+
+        clubsCardInHand.clear();
+        diamondsCardInHand.clear();
+        heartsCardInHand.clear();
+        spadesCardInHand.clear();
     }
 
-    private void setCardFront(Context context) {
+    public void buildHand(ArrayList<Integer> card) {
+        this.temp.clear();
+        this.temp.addAll(card);
+        this.cardsInHand.clear();
+        clearAllSuits();
+        this.cardsInHand.addAll(temp);
+        setCardFront();
+    }
 
+    public void addCardToHand(ArrayList<Integer> newArray){
+
+        this.cardsInHand.addAll(newArray);
+
+    }
+
+    public void removeOneCardInHand(Object object) {
+        this.cardsInHand.remove(object);
+    }
+
+    private void setCardFront() {
         for (int i = 0; i < cardsInHand.size(); i++) {
-            Card card = cardsInHand.get(i);
-            String value_suit = card.getValue() + "_" + card.getSuit();
-            value_suit = value_suit.toLowerCase().trim();
-            int id = context.getResources().getIdentifier(value_suit, "drawable", context.getPackageName());
-            card.setCardFront(context.getResources().getDrawable(id, context.getApplicationContext().getTheme()));
-            cardsInHand.set(i, card);
-
-            if (card.getSuit().equalsIgnoreCase(Suit.CLUBS.name())) {
+            Integer card = cardsInHand.get(i);
+            if (Cards.valueOf(card).name().substring(0, Cards.valueOf(card).name().indexOf("_")).equalsIgnoreCase(Suit.CLUBS.name())) {
                 clubsCardInHand.add(card);
-            } else if (card.getSuit().equalsIgnoreCase(Suit.DIAMONDS.name())) {
+            } else if (Cards.valueOf(card).name().substring(0, Cards.valueOf(card).name().indexOf("_")).equalsIgnoreCase(Suit.DIAMONDS.name())) {
                 diamondsCardInHand.add(card);
-            } else if (card.getSuit().equalsIgnoreCase(Suit.HEARTS.name())) {
+            } else if (Cards.valueOf(card).name().substring(0, Cards.valueOf(card).name().indexOf("_")).equalsIgnoreCase(Suit.HEARTS.name())) {
                 heartsCardInHand.add(card);
-            } else if (card.getSuit().equalsIgnoreCase(Suit.SPADES.name())) {
+            } else if (Cards.valueOf(card).name().substring(0, Cards.valueOf(card).name().indexOf("_")).equalsIgnoreCase(Suit.SPADES.name())) {
                 spadesCardInHand.add(card);
             }
 
         }
     }
 
-    public ArrayList<Card> getCardsInHand() {
+    public ArrayList<Integer> getCardsInHand() {
         return this.cardsInHand;
     }
 
-    public ArrayList<Card> getCardsBySuit(Suit suit) {
+    public ArrayList<Integer> getCardsBySuit(Suit suit) {
         if (suit == Suit.CLUBS) {
             return clubsCardInHand;
         } else if (suit == Suit.DIAMONDS) {

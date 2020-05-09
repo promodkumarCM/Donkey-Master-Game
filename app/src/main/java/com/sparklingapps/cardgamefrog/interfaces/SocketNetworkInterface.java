@@ -19,6 +19,12 @@ public interface SocketNetworkInterface {
 
     void addCardToPlayerHand(String responseMsg);
 
+    void addCardToTable(String responseMsg);
+
     void onGameStarted(String responseMsg);
+
+    void onClearTable(String responseMsg);
+
+    void updateTurn(boolean myTurn);
 
 }

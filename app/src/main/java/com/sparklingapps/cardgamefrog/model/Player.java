@@ -1,11 +1,8 @@
 package com.sparklingapps.cardgamefrog.model;
 
-import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,8 +10,7 @@ public class Player {
 
     @SerializedName("position")
     @Expose
-    private String position;
-
+    private Integer position;
     @SerializedName("id")
     @Expose
     private String id;
@@ -29,25 +25,45 @@ public class Player {
     private String type;
     @SerializedName("card")
     @Expose
-    private ArrayList<Card> card = null;
+    private ArrayList<Integer> card = null;
     @SerializedName("isMyTurn")
     @Expose
     private Boolean isMyTurn;
 
-
+    /**
+     * No args constructor for use in serialization
+     *
+     */
     public Player() {
-        super();
     }
 
-
-    public Player(String id, Integer roomId, String name, String type, ArrayList<Card> card, Boolean isMyTurn) {
+    /**
+     *
+     * @param name
+     * @param position
+     * @param id
+     * @param type
+     * @param isMyTurn
+     * @param roomId
+     * @param card
+     */
+    public Player(Integer position, String id, Integer roomId, String name, String type, ArrayList<Integer> card, Boolean isMyTurn) {
         super();
+        this.position = position;
         this.id = id;
         this.roomId = roomId;
         this.name = name;
         this.type = type;
         this.card = card;
         this.isMyTurn = isMyTurn;
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
     }
 
     public String getId() {
@@ -82,11 +98,11 @@ public class Player {
         this.type = type;
     }
 
-    public ArrayList<Card> getCard() {
+    public ArrayList<Integer> getCard() {
         return card;
     }
 
-    public void setCard(ArrayList<Card> card) {
+    public void setCard(ArrayList<Integer> card) {
         this.card = card;
     }
 
@@ -96,14 +112,6 @@ public class Player {
 
     public void setIsMyTurn(Boolean isMyTurn) {
         this.isMyTurn = isMyTurn;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
     }
 
 }
