@@ -35,6 +35,7 @@ import com.sparklingapps.cardgamefrog.utils.VerticalOverlapDecoration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 
 import io.socket.client.Socket;
 
@@ -63,6 +64,8 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
     private TextView tv_tableMsg;
     private Hand hand;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,14 +80,6 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
         final String playerJsonString = intent.getStringExtra("playerJson");
 
         playerObjFromServer = new Gson().fromJson(playerJsonString, Player.class);
-
-        if (playerObjFromServer.getIsMyTurn()) {
-
-            tv_tableMsg.setText("Your Turn");
-            btnDeal.setEnabled(true);
-            //Toast.makeText(this, "Your TURN", Toast.LENGTH_LONG).show();
-
-        }
 
         hand = new Hand();
         hand.buildHand(playerObjFromServer.getCard());
@@ -180,6 +175,17 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
         manager.setStackFromEnd(true);
         mSpadesCardRecyclerView.setLayoutManager(manager3);
         mSpadesCardRecyclerView.setAdapter(((CardListAndAdapterModel) mHashMapWithAdapter.get(Suit.SPADES.name())).getmAdapter());
+
+
+        if (playerObjFromServer.getIsMyTurn()) {
+
+            tv_tableMsg.setText("Your Turn");
+            btnDeal.setEnabled(true);
+            //checkCardPresentForUser(true);
+            //Toast.makeText(this, "Your TURN", Toast.LENGTH_LONG).show();
+
+        }
+
 
     }
 
@@ -296,12 +302,14 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
     @Override
     public void updateTurn(boolean myTurn) {
 
-        runOnUiThread(new Runnable() {
+        runOnUiThread(
+                new Runnable() {
             @Override
             public void run() {
 
                 tv_tableMsg.setText("Your Turn");
                 btnDeal.setEnabled(true);
+                enableAllSuitRecyclerView();
 
             }
         });
@@ -315,7 +323,6 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
         Player currentCardPutplayer = new Gson().fromJson(responseMsg, Player.class);
         mTableCardList.addAll(currentCardPutplayer.getCard());
         mTablePlayerList.add(currentCardPutplayer);
-
         //removing duplicated
 /*        HashSet<Integer> hashSet = new HashSet<Integer>();
         hashSet.addAll(mTableCardList);
@@ -328,14 +335,60 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
                 tv_tableMsg.setText("");
                 selectedCardImageView.setImageResource(android.R.color.transparent);
                 mTableCardAdapter.notifyDataSetChanged();
+               // checkCardPresentForUser(false);
             }
         });
 
+    }
+
+    public void checkCardPresentForUser(boolean firstTime) {
+        int card = 51;
+        if(!firstTime){
+            card = mTableCardList.get(mTableCardList.size()-1);
+        }
+
+        Suit suit =Cards.getClub(card);
+        int sameSuitCardsLength = hand.getCardSizeBySuit(suit);
+        if(sameSuitCardsLength > 0){
+            Iterator iterator = mHashMapWithAdapter.entrySet().iterator();
+            while (iterator.hasNext()){
+                HashMap.Entry me2 = (HashMap.Entry) iterator.next();
+                if(suit.name().equalsIgnoreCase(me2.getKey().toString())){
+                    MyCardAdapter tempAdapter = ((CardListAndAdapterModel) me2.getValue()).getmAdapter();
+                    tempAdapter.setIsClickable(true);
+                    tempAdapter.notifyDataSetChanged();
+                }
+                else{
+                    MyCardAdapter tempAdapter = ((CardListAndAdapterModel) me2.getValue()).getmAdapter();
+                    tempAdapter.setIsClickable(false);
+                    tempAdapter.notifyDataSetChanged();
+                }
+            }
+        }
+        else{
+            //user not hand that suit of card
+            //enableAllSuitRecyclerView();
+        }
+    }
+
+    public void enableAllSuitRecyclerView(){
+
+        Iterator iterator = mHashMapWithAdapter.entrySet().iterator();
+        while (iterator.hasNext()) {
+            HashMap.Entry me2 = (HashMap.Entry) iterator.next();
+            MyCardAdapter tempAdapter = ((CardListAndAdapterModel) me2.getValue()).getmAdapter();
+            tempAdapter.setIsClickable(true);
+            tempAdapter.notifyDataSetChanged();
+        }
 
     }
 
+
+
+
     @Override
     public void userSelectedCard(Integer card) {
+
 
         selectedCardObj = card;
         selectedCardImageView.setImageResource(Cards.valueOf(card).getResource());

@@ -29,6 +29,7 @@ public class ViewUtil {
         int screenHeight = BaseActivity.getScreenHeight();
         if (screenWidth == WIDTH_1080 && screenHeight != HEIGHT_1920) {
             screenHeight = HEIGHT_1920;
+
         }
 
         if (screenWidth == WIDTH_720 && screenHeight != HEIGHT_1280) {

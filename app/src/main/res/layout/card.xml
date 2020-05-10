@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="5sp">
+    android:layout_width="81dp"
+    android:layout_height="122dp"
+    android:orientation="vertical">
 
     <com.sparklingapps.cardgamefrog.utils.CardImageView
         android:padding="2dp"
         android:id="@+id/card_icon"
         android:layout_width="80dp"
-        android:layout_height="130dp"
+        android:layout_height="120dp"
         android:scaleType="fitXY"
         android:src="@drawable/yellow_back"
         />
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/rl_overlay"
+        android:visibility="visible"
+        android:background="@color/colorDisableRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</RelativeLayout>

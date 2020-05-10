@@ -86,6 +86,20 @@ public class Hand {
         }
     }
 
+    public int getCardSizeBySuit(Suit suit){
+        if (suit == Suit.CLUBS) {
+            return clubsCardInHand.size();
+        } else if (suit == Suit.DIAMONDS) {
+            return diamondsCardInHand.size();
+        } else if (suit == Suit.HEARTS) {
+            return heartsCardInHand.size();
+        } else if (suit == Suit.SPADES) {
+            return spadesCardInHand.size();
+        } else {
+            return -1;
+        }
+    }
+
     public int getHandSize() {
         return cardsInHand.size();
     }

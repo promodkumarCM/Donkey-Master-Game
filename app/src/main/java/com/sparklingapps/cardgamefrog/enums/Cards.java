@@ -1,6 +1,7 @@
 package com.sparklingapps.cardgamefrog.enums;
 
 import com.sparklingapps.cardgamefrog.R;
+import com.sparklingapps.cardgamefrog.model.Card;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -67,6 +68,15 @@ public enum Cards {
 
     private static Map<Integer, Cards> map = new HashMap<>();
 
+    public static int DIAMONDS_START = 0;
+    public static int DIAMONDS_END = 12;
+    public static int CLUBS_START = 13;
+    public static int CLUBS_END = 25;
+    public static int HEARTS_START = 26;
+    public static int HEARTS_END = 38;
+    public static int SPADES_START = 39;
+    public static int SPADES_END = 51;
+
     static {
         for (Cards card : Cards.values()) {
             map.put(card.id, card);
@@ -87,6 +97,21 @@ public enum Cards {
 
     public int getResource() {
         return resource;
+    }
+
+    public static Suit getClub(Integer cardId) {
+
+        if (cardId >= DIAMONDS_START && cardId <= DIAMONDS_END) {
+            return Suit.DIAMONDS;
+        } else if (cardId >= CLUBS_START && cardId <= CLUBS_END) {
+            return Suit.CLUBS;
+        } else if (cardId >= HEARTS_START && cardId <= HEARTS_END) {
+            return Suit.HEARTS;
+        } else if ((cardId >= SPADES_START && cardId <= SPADES_END)) {
+            return Suit.SPADES;
+        }
+
+        return null;
     }
 
     public static Cards valueOf(int cardId) {
