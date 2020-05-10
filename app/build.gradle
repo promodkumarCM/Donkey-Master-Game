@@ -31,6 +31,7 @@ dependencies {
 
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     compile(group: 'com.heroiclabs.nakama', name: 'client', version: '+')
     compile('org.slf4j:slf4j-api:1.7.25') {
         force = true // don't upgrade to "1.8.0-alpha2"
