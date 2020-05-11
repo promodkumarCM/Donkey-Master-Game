@@ -1,10 +1,11 @@
 package com.sparklingapps.cardgamefrog;
 
-import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.heroiclabs.nakama.Client;
+
+import com.sparklingapps.cardgamefrog.fragments.HomeFragment;
 import com.sparklingapps.cardgamefrog.interfaces.SocketNetworkInterface;
 import com.sparklingapps.cardgamefrog.model.CreateRoom;
 import com.sparklingapps.cardgamefrog.model.JoinRoom;
@@ -13,7 +14,8 @@ import com.sparklingapps.cardgamefrog.model.Room;
 import com.sparklingapps.cardgamefrog.socket.SocketConstants;
 import com.sparklingapps.cardgamefrog.socket.SocketNetworkManager;
 import com.sparklingapps.cardgamefrog.utils.BaseActivity;
-
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +24,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.Random;
 
 import io.socket.client.Socket;
 
@@ -108,6 +109,17 @@ public class MainActivity extends BaseActivity implements SocketNetworkInterface
 
             }
         });
+
+
+         Button btn_frag=findViewById(R.id.btn_frag);
+         btn_frag.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+
+                 loadFragment(new HomeFragment());
+             }
+         });
+
 
 
     }
@@ -216,5 +228,16 @@ public class MainActivity extends BaseActivity implements SocketNetworkInterface
     @Override
     public void onSocketError() {
 
+    }
+
+
+    private void loadFragment(Fragment fragment) {
+// create a FragmentManager
+        FragmentManager fm=getSupportFragmentManager();
+// create a FragmentTransaction to begin the transaction and replace the Fragment
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+// replace the FrameLayout with new Fragment
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.commit(); // save the changes
     }
 }
