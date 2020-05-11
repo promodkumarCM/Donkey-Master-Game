@@ -78,11 +78,17 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
 
         Intent intent = getIntent();
         final String playerJsonString = intent.getStringExtra("playerJson");
-
         playerObjFromServer = new Gson().fromJson(playerJsonString, Player.class);
 
+        HashSet<Integer> hashSet = new HashSet<Integer>();
+        ArrayList<Integer> test = new ArrayList<>();
+        test.addAll(playerObjFromServer.getCard());
+        hashSet.addAll(test);
+        test.clear();
+        test.addAll(hashSet);
+
         hand = new Hand();
-        hand.buildHand(playerObjFromServer.getCard());
+        hand.buildHand(test);
 
         mTableCardList = new ArrayList<>();
         mTablePlayerList = new ArrayList<>();
@@ -122,7 +128,8 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
                 String cardSuitName = Cards.valueOf(selectedCardObj).name().substring(0, Cards.valueOf(selectedCardObj).name().indexOf("_"));
                 hand.removeOneCardInHand(selectedCardObj);
 
-                reBuildHand(hand.getCardsInHand(),cardSuitName);
+                //reBuildHand(hand.getCardsInHand(),cardSuitName);
+                reBuildHand(hand.getCardsInHand(),"");
 
 
             }
@@ -181,7 +188,7 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
 
             tv_tableMsg.setText("Your Turn");
             btnDeal.setEnabled(true);
-            //checkCardPresentForUser(true);
+            checkCardPresentForUser(true);
             //Toast.makeText(this, "Your TURN", Toast.LENGTH_LONG).show();
 
         }
@@ -300,7 +307,7 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
     }
 
     @Override
-    public void updateTurn(boolean myTurn) {
+    public void updateTurn(final boolean myTurn) {
 
         runOnUiThread(
                 new Runnable() {
@@ -309,7 +316,9 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
 
                 tv_tableMsg.setText("Your Turn");
                 btnDeal.setEnabled(true);
-                enableAllSuitRecyclerView();
+                if(mTableCardList.size() <= 0 && myTurn ) {
+                    enableAllSuitRecyclerView();
+                }
 
             }
         });
@@ -335,7 +344,7 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
                 tv_tableMsg.setText("");
                 selectedCardImageView.setImageResource(android.R.color.transparent);
                 mTableCardAdapter.notifyDataSetChanged();
-               // checkCardPresentForUser(false);
+                checkCardPresentForUser(false);
             }
         });
 
@@ -367,7 +376,7 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
         }
         else{
             //user not hand that suit of card
-            //enableAllSuitRecyclerView();
+            enableAllSuitRecyclerView();
         }
     }
 

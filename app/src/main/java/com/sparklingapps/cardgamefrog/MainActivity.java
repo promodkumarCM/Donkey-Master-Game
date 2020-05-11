@@ -100,7 +100,7 @@ public class MainActivity extends BaseActivity implements SocketNetworkInterface
                 btnStart.setEnabled(false);
                 Gson gson = new Gson();
                 String test = gson.toJson(roomId);
-                socketConnection.registerEventListenerHandler(SocketConstants.ADD_CARD);
+               // socketConnection.registerEventListenerHandler(SocketConstants.ADD_CARD);
                 socketConnection.registerEventListenerHandler(SocketConstants.STARTED_GAME);
                 socketConnection.sendDataToServer(SocketConstants.START_GAME,test);
 

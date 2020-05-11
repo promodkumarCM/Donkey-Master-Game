@@ -1,6 +1,7 @@
 package com.sparklingapps.cardgamefrog.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ public class MyCardAdapter extends RecyclerView.Adapter<MyCardAdapter.ViewHolder
     private Context mContext;
     private OnCardAdapterClick listener;
     private int lastClickedPosition = -1;
+
+    private static final String TAG = "MyCardAdapter";
 
     private boolean isClickable = false;
 
@@ -63,11 +66,10 @@ public class MyCardAdapter extends RecyclerView.Adapter<MyCardAdapter.ViewHolder
                 holder.cardFace.select();
             }*/
         }
+        Log.d(TAG, "onBindViewHolder: "+isClickable);
         holder.cardFace.setImageResource(Cards.valueOf(mCardList.get(position)).getResource());
+        holder.overLay.setVisibility(isClickable ? View.GONE : View.VISIBLE);
 
-        if (isClickable) {
-            holder.overLay.setVisibility(View.GONE);
-        }
     }
 
     @Override
