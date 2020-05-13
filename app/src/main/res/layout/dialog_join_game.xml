@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffffff">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:id="@+id/a"
+            android:gravity="center"
+            android:background="#EFEFEF"
+            android:src="@drawable/game_cube"
+            android:scaleType="fitCenter" />
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_marginLeft="-60dp"
+            android:src="@drawable/ic_close_black_24dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+    </LinearLayout>
+
+
+
+
+    <com.sparklingapps.cardgamefrog.utils.CardGameTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Game Pin"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"
+        app:textfontName="TheBomb"
+        android:gravity="center_horizontal" />
+
+    <com.sparklingapps.cardgamefrog.utils.CardGameEditText
+        android:id="@+id/edt_join_pin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="20sp"
+        android:inputType="number"
+        android:textColor="@color/colorAttachVideo"
+        android:layout_gravity="center_horizontal"
+        app:textfontName="TheBomb"
+        android:hint="Enter Pin"
+        android:gravity="center_horizontal" />
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+      <!--  <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_join_dialog"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="normal"
+            app:background="@color/colorYellow"
+            android:src="@drawable/ic_extension_black_24dp"
+            android:visibility="gone"
+            />-->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btn_create_event"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="left"
+            android:clickable="true"
+            android:elevation="5dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thicknessRatio="1.9"
+            app:cardBackgroundColor="@color/colorQuickWizardButton"
+            app:cardCornerRadius="25dp"
+            app:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="40dp">
+
+                <ImageView
+                    android:id="@+id/img_create_event_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="center"
+                    android:src="@drawable/play_triangle" />
+
+                <com.sparklingapps.cardgamefrog.utils.CardGameTextView
+                    android:id="@+id/lbl_createEvent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/img_create_event_icon"
+                    android:text="Join Game"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:textfontName="TheBomb" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

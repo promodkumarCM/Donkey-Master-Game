@@ -12,12 +12,12 @@
         android:layout_width="80dp"
         android:layout_height="130dp"
         android:scaleType="fitXY"
-        android:src="@drawable/yellow_back"
+        android:src="@drawable/react_slot"
         />
 
     <TextView
         android:gravity="center_horizontal"
-        android:text="Player 1"
+        android:text=""
         android:textColor="@color/cardview_light_background"
         android:id="@+id/tv_player_name"
         android:layout_width="80dp"

@@ -30,6 +30,10 @@ public class Player {
     @Expose
     private Boolean isMyTurn;
 
+    @SerializedName("totalPlayers")
+    @Expose
+    private Integer totalPlayers;
+
     /**
      * No args constructor for use in serialization
      *
@@ -47,7 +51,7 @@ public class Player {
      * @param roomId
      * @param card
      */
-    public Player(Integer position, String id, Integer roomId, String name, String type, ArrayList<Integer> card, Boolean isMyTurn) {
+    public Player(Integer position, String id, Integer roomId, String name, String type, ArrayList<Integer> card, Boolean isMyTurn,Integer totalPlayers) {
         super();
         this.position = position;
         this.id = id;
@@ -56,6 +60,7 @@ public class Player {
         this.type = type;
         this.card = card;
         this.isMyTurn = isMyTurn;
+        this.totalPlayers = totalPlayers;
     }
 
     public Integer getPosition() {
@@ -114,4 +119,11 @@ public class Player {
         this.isMyTurn = isMyTurn;
     }
 
+    public Integer getTotalPlayers() {
+        return totalPlayers;
+    }
+
+    public void setTotalPlayers(Integer totalPlayers) {
+        this.totalPlayers = totalPlayers;
+    }
 }

@@ -8,7 +8,8 @@ import android.content.SharedPreferences;
 /**
  * Created by Basil1112  on 01,November,2018
  */
-public class PreferenceController {
+public class PreferenceController
+{
     private static final String TAG = "PreferenceController";
 
     private SharedPreferences mSharedPreferences;

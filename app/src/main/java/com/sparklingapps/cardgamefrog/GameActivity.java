@@ -8,11 +8,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,14 +60,12 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
     private ImageView selectedCardImageView;
     private Integer selectedCardObj;
     private HashMap mHashMapWithAdapter;
-    private Button btnDeal;
+    private CardView btnDeal;
     private OnCardAdapterClick cardClickListener;
     private Player playerObjFromServer;
-
     private TextView tv_tableMsg;
     private Hand hand;
-
-
+    public static Integer totalPlayerSlot = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,7 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
         Intent intent = getIntent();
         final String playerJsonString = intent.getStringExtra("playerJson");
         playerObjFromServer = new Gson().fromJson(playerJsonString, Player.class);
+        totalPlayerSlot = playerObjFromServer.getTotalPlayers();
 
         HashSet<Integer> hashSet = new HashSet<Integer>();
         ArrayList<Integer> test = new ArrayList<>();
@@ -106,12 +108,8 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
             @Override
             public void onClick(View view) {
                 //setting current dealed card to table & notify data change
-               /* mTableCardList.add(selectedCardObj);
-                if(mTableCardAdapter != null){
-                    mTableCardAdapter.notifyDataSetChanged();
-                }*/
 
-               btnDeal.setEnabled(false);
+               btnDeal.setVisibility(View.INVISIBLE);
 
                 ArrayList<Integer> currentPlayedCard = new ArrayList<>();
                 currentPlayedCard.add(selectedCardObj);
@@ -139,10 +137,8 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
 
         //setting recycler view with my [players] card //full card horizontal
         mTableCardAdapter = new MyTableCardAdapter(GameActivity.this, mTableCardList, mTablePlayerList);
-        //   itemDecorator = new HorizontalOverlapDecoration();
         mDeckCardRecyclerView = findViewById(R.id.rv_table_deck_cards);
         mDeckCardRecyclerView.setLayoutManager(new LinearLayoutManager(GameActivity.this, LinearLayoutManager.HORIZONTAL, false));
-        //  mDeckCardRecyclerView.addItemDecoration(itemDecorator);
         mDeckCardRecyclerView.setAdapter(mTableCardAdapter);
 
         mHashMapWithAdapter = new HashMap();
@@ -187,13 +183,18 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
         if (playerObjFromServer.getIsMyTurn()) {
 
             tv_tableMsg.setText("Your Turn");
-            btnDeal.setEnabled(true);
+            btnDeal.setVisibility(View.VISIBLE);
             checkCardPresentForUser(true);
             //Toast.makeText(this, "Your TURN", Toast.LENGTH_LONG).show();
 
         }
 
 
+    }
+
+    public void showButtonAnimation(){
+        final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        btnDeal.startAnimation(animShake);
     }
 
     public void reBuildHand(ArrayList<Integer> arrayAfter,String suitToNotify) {
@@ -295,6 +296,8 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
 
         mTableCardList.clear();
         mTablePlayerList.clear();
+
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -315,7 +318,8 @@ public class GameActivity extends BaseActivity implements SocketNetworkInterface
             public void run() {
 
                 tv_tableMsg.setText("Your Turn");
-                btnDeal.setEnabled(true);
+                btnDeal.setVisibility(View.VISIBLE);
+                showButtonAnimation();
                 if(mTableCardList.size() <= 0 && myTurn ) {
                     enableAllSuitRecyclerView();
                 }

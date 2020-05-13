@@ -9,20 +9,21 @@
     tools:context=".GameActivity">
 
     <FrameLayout
+        android:background="@drawable/table_background"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5">
 
         <FrameLayout
-            android:background="@drawable/table_background"
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
+                android:layout_gravity="center_vertical"
                 android:id="@+id/iv_selectedCard"
-                android:layout_width="80dp"
-                android:layout_height="100dp">
+                android:layout_width="50dp"
+                android:layout_height="70dp">
             </ImageView>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -30,21 +31,17 @@
                 android:id="@+id/rv_table_deck_cards"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"/>
 
-            </androidx.recyclerview.widget.RecyclerView>
-
-            <TextView
+            <com.sparklingapps.cardgamefrog.utils.CardGameTextView
                 android:textColor="@color/design_default_color_background"
                 android:layout_gravity="bottom|center_horizontal"
                 android:id="@+id/table_msg"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-condensed"
-                android:layout_marginBottom="15dp"
+                android:textSize="12sp"
+                android:padding="5dp"
+                app:textfontName="TheBomb"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
+                android:layout_height="wrap_content"/>
 
 
         </FrameLayout>
@@ -56,10 +53,11 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/design_default_color_secondary_variant"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_marginTop="5dp">
 
         <LinearLayout
+            android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -99,12 +97,47 @@
 
 
 
-    <Button
+
+
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/btn_deal"
-        android:text="Deal"
-        android:enabled="false"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:minWidth="50dp"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="right"
+        android:clickable="true"
+        android:elevation="5dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        android:thicknessRatio="1.9"
+        app:cardBackgroundColor="@color/colorQuickWizardButton"
+        app:cardCornerRadius="25dp"
+        app:cardUseCompatPadding="true"
+        android:visibility="invisible">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+
+            <com.sparklingapps.cardgamefrog.utils.CardGameTextView
+                android:id="@+id/lbl_createEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:text="Deal"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:textfontName="TheBomb" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
 
 </LinearLayout>

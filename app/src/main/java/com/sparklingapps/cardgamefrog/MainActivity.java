@@ -1,19 +1,27 @@
 package com.sparklingapps.cardgamefrog;
 
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 
+import com.sparklingapps.cardgamefrog.enums.GameStartEnum;
 import com.sparklingapps.cardgamefrog.fragments.HomeFragment;
 import com.sparklingapps.cardgamefrog.interfaces.SocketNetworkInterface;
+import com.sparklingapps.cardgamefrog.interfaces.onClickDialog;
 import com.sparklingapps.cardgamefrog.model.CreateRoom;
 import com.sparklingapps.cardgamefrog.model.JoinRoom;
 import com.sparklingapps.cardgamefrog.model.Player;
 import com.sparklingapps.cardgamefrog.model.Room;
 import com.sparklingapps.cardgamefrog.socket.SocketConstants;
 import com.sparklingapps.cardgamefrog.socket.SocketNetworkManager;
+import com.sparklingapps.cardgamefrog.utils.AppConstants;
 import com.sparklingapps.cardgamefrog.utils.BaseActivity;
+import com.sparklingapps.cardgamefrog.utils.MyHelper;
+import com.sparklingapps.cardgamefrog.utils.PreferenceController;
+import com.sparklingapps.cardgamefrog.utils.ViewDialog;
+
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
@@ -27,21 +35,75 @@ import android.widget.Toast;
 
 import io.socket.client.Socket;
 
-public class MainActivity extends BaseActivity implements SocketNetworkInterface {
+public class MainActivity extends BaseActivity implements SocketNetworkInterface, onClickDialog {
     //socket connection variables
     private SocketNetworkManager socketConnection;
     private static final String TAG = "MainActivity";
     private Socket socket;
     private Room roomId;
 
+    private PreferenceController sharedPreferenceController;
+    private CardView btnCreateEvent;
+    private CardView btnJoinEvent;
+    private onClickDialog dialogClickListener;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_activity_new);
 
-        Button createGameBtn = findViewById(R.id.btn_register);
+        sharedPreferenceController = new PreferenceController(MainActivity.this);
+
+        dialogClickListener = this;
+        btnCreateEvent = findViewById(R.id.btn_create_event);
+        btnCreateEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                MyHelper.showProgress(MainActivity.this,false);
+
+                Player playerObj = new Player();
+                playerObj.setName(sharedPreferenceController.getString(AppConstants.PLAYER_NAME));
+                playerObj.setIsMyTurn(false);
+                playerObj.setType("admin");
+
+                CreateRoom roomObj = new CreateRoom();
+                roomObj.setRoomName(sharedPreferenceController.getString(AppConstants.PLAYER_ROOM));
+                roomObj.setRoomTotalCount(2);
+                roomObj.setPlayerObj(playerObj);
+
+
+                Gson gson = new Gson();
+                try {
+                    String createRoomJson = gson.toJson(roomObj);
+                    socketConnection.registerEventListenerHandler(SocketConstants.AFTER_GAME_CREATED);
+                    socketConnection.registerEventListenerHandler(SocketConstants.NOTIFY_PLAYER_JOIN);
+                    socketConnection.sendDataToServer(SocketConstants.CREATE_GAME,createRoomJson);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        btnJoinEvent = findViewById(R.id.btn_join_event);
+        btnJoinEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ViewDialog dialog = new ViewDialog();
+                dialog.showJoinGameDialog(MainActivity.this,dialogClickListener);
+
+
+            }
+        });
+
+
+
+
+
+     /*   Button createGameBtn = findViewById(R.id.btn_register);
         createGameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,7 +180,7 @@ public class MainActivity extends BaseActivity implements SocketNetworkInterface
 
                  loadFragment(new HomeFragment());
              }
-         });
+         });*/
 
 
 
@@ -143,6 +205,9 @@ public class MainActivity extends BaseActivity implements SocketNetworkInterface
 
     }
 
+
+
+
     @Override
     public void networkCallbackReceived() {
 
@@ -158,6 +223,18 @@ public class MainActivity extends BaseActivity implements SocketNetworkInterface
         Gson gson = new Gson();
         Room room = gson.fromJson(responseMsg,Room.class);
         roomId = room;
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                MyHelper.hideProgress();
+                ViewDialog dialog = new ViewDialog();
+                dialog.showCreateGameDialog(MainActivity.this,room.getRoomId(),roomId,dialogClickListener);
+
+            }
+        });
+
+
         Log.d(TAG, "onAfterGameCreated: "+room.getRoomId());
 
     }
@@ -239,5 +316,44 @@ public class MainActivity extends BaseActivity implements SocketNetworkInterface
 // replace the FrameLayout with new Fragment
         fragmentTransaction.replace(R.id.frameLayout, fragment);
         fragmentTransaction.commit(); // save the changes
+    }
+
+
+    @Override
+    public void onClickDialogStartGame(Room roomId, GameStartEnum gameCase) {
+        Gson gson = new Gson();
+        String test = gson.toJson(roomId);
+        // socketConnection.registerEventListenerHandler(SocketConstants.ADD_CARD);
+        socketConnection.registerEventListenerHandler(SocketConstants.STARTED_GAME);
+        socketConnection.sendDataToServer(SocketConstants.START_GAME,test);
+
+        MyHelper.showProgress(MainActivity.this,false);
+
+    }
+
+    @Override
+    public void onClickDialogJoinGame(int roomId, GameStartEnum gameCase) {
+
+        MyHelper.showProgress(MainActivity.this,false);
+
+        Player playerObj = new Player();
+        playerObj.setName(sharedPreferenceController.getString(AppConstants.PLAYER_NAME));
+        playerObj.setIsMyTurn(false);
+        playerObj.setType("USER");
+
+
+        JoinRoom joinRoom = new JoinRoom();
+        joinRoom.setRoomId(roomId);
+        joinRoom.setPlayerObj(playerObj);
+        Gson gson = new Gson();
+
+        String joinrequest = gson.toJson(joinRoom);
+
+        socketConnection.registerEventListenerHandler(SocketConstants.NOTIFY_PLAYER_JOIN);
+        socketConnection.registerEventListenerHandler(SocketConstants.STARTED_GAME);
+        socketConnection.sendDataToServer(SocketConstants.PLAYER_JOIN,joinrequest);
+
+
+
     }
 }

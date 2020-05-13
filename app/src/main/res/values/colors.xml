@@ -3,4 +3,251 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="colorDisableRecyclerView">#B2878686</color>
+
+
+    <color name="transparent">#00FFFFFF</color>
+
+    <color name="colorTotalConfirmed">#E91E63</color>
+    <color name="colorTotalDeaths">#B71C1C</color>
+    <color name="colorTotalRecovered">#1B5E20</color>
+
+
+    <color name="prediction">#ff00ff</color>
+    <color name="basal">#00ffff</color>
+    <color name="iob">#FFFB8C00</color>
+    <color name="bolus">#FFFFCC03</color>
+    <color name="cob">#8BC34A</color>
+    <color name="ratio">#FFFFFF</color>
+    <color name="inrange">#00FF00</color>
+    <color name="low">#FF0000</color>
+    <color name="high">#FFFF00</color>
+    <color name="listdelimiter">#505050</color>
+    <color name="tabBgColor">#f0003f59</color>
+    <color name="tabBgColorSelected">#FF33B5E5</color>
+    <color name="deviations">#FF0000</color>
+    <color name="inrangebackground">#2800FF00</color>
+    <color name="basebasal">#C83F51B5</color>
+    <color name="tempbasal">#C803A9F4</color>
+    <color name="graphgrid">#757575</color>
+    <color name="updating">#50ffffff</color>
+    <color name="colorLightGray">#d8d8d8</color>
+
+    <color name="defaultbackground">#424242</color>
+
+    <color name="tempTargetBackground">#77dd77</color>
+    <color name="tempTargetDisabledBackground">#303F9F</color>
+
+
+    <color name="colorInitializingBorder">#00695c</color>
+    <color name="cardColorBackground">#121212</color>
+    <color name="cardObjectiveText">#779ECB</color>
+    <color name="linearBlockBackground">#3e3d3d</color>
+    <color name="configBuilderSelectedBackground">#262525</color>
+    <color name="colorAcceptTempButton">#f4d700</color>
+    <color name="colorTreatmentButton">#67dfe8</color>
+    <color name="colorCalibrationButton">#e93057</color>
+    <color name="colorCalculatorButton">#67e86a</color>
+    <color name="colorQuickWizardButton">#ffae01</color>
+    <color name="colorCancelTempButton">#d08cff</color>
+    <color name="colorSetTempButton">#FF478EFF</color>
+    <color name="colorSetExtendedButton">#FFDD7792</color>
+    <color name="colorProfileSwitchButton">#ca77dd</color>
+    <color name="colorTempTargetButton">#d43429</color>
+    <color name="colorInProgress">#c45026</color>
+    <color name="colorActive">#1b5e20</color>
+    <color name="colorNotEnded">#190084</color>
+    <color name="colorPumpLabel">#779ECB</color>
+    <color name="cardItemLabel">#FF478EFF</color>
+    <color name="loopenabled">#47c8ff</color>
+    <color name="loopdisabled">#FFDD7792</color>
+    <color name="looppumpsuspended">#ff0400</color>
+    <color name="notificationAnnouncement">#FF8C00</color>
+    <color name="notificationUrgent">#ff0400</color>
+    <color name="notificationNormal">#ff5e55</color>
+    <color name="notificationLow">#ff827c</color>
+    <color name="notificationInfo">#009705</color>
+    <color name="swipe_color_1">#4CAF50</color>
+    <color name="swipe_color_2">#03A9F4</color>
+    <color name="swipe_color_3">#FFC107</color>
+    <color name="swipe_color_4">#FF5722</color>
+    <color name="color_section">#4CAF50</color>
+    <color name="color_author">#8E24AA</color>
+    <!-- Colors for settings of color theme-->
+    <color name="white">#ffffff</color>
+    <color name="violet">#9c27b0</color>
+    <color name="light_green">#8bc34a</color>
+    <!-- Colors for gradient.xml file -->
+    <color name="gradient_center_color">#880d0d0f</color>
+    <color name="gradient_end_color">#885d5d5e</color>
+    <color name="gradient_start_color">#880f0f10</color>
+    <color name="color_trail_text">#102027</color>
+    <color name="color_date_text">#a4a4a4</color>
+    <color name="color_app_bar_text">#005689</color>
+    <color name="color_tab_text">#a7c0cd</color>
+    <color name="nav_bar_start">#7db1ec</color>
+    <color name="nav_bar_end">#002e5b</color>
+
+
+    <color name="colorAccentSecondary">#5fFF5722</color>
+    <color name="colorPrimaryLight">#30ffffff</color>
+    <color name="colorPrimaryLightSelect">#E6E6E6</color>
+    <color name="colorPrimaryLightRipple">#5fDA614E</color>
+    <color name="colorPrimaryLightRipple_">#3fDA614E</color>
+
+
+    <color name="colorWhiteTrans">#40FFFFFF</color>
+
+    <color name="colorGreytrans">#802c3d53</color>
+    <color name="colorBlueTransi">#80FF5722</color>
+
+    <color name="taskred">#D70005</color>
+
+    <color name="colorBlueLightShow">#dd3C7AFC</color>
+
+    <!--color for welcome-->
+    <color name="colorFrom">#c24c39</color>
+    <color name="colorTo">#00C853</color>
+    <!--color for welcome-->
+
+    <color name="colorHolderDrawable">#c24c39</color>
+    <color name="colorActionMode">#DA614E</color>
+    <color name="colorActionModeDarK">#c24c39</color>
+    <color name="colorRightBubble">@color/colorWhite</color>
+    <color name="colorLeftBubble">#907acef4</color>
+    <color name="colorOtherBubble">#009ea5</color>
+    <color name="colorNewTmyBizBlue">#345C74</color>
+    <color name="colorBlue">#3C7AFC</color>
+    <color name="colorBlueLight">#03A9F4</color>
+    <color name="colorBlueLighter">#21007ee5</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteLighter">#99ffffff</color>
+    <color name="colorWhiteLight">#21ffffff</color>
+    <color name="colorGray">#888888</color>
+    <color name="colorGrayLighter">#EAEAEA</color>
+    <color name="colorGrayLight">#B6B6B6</color>
+
+    <color name="colorGreen">#03C03C</color>
+    <color name="colorGreenLight">#710EC654</color>
+
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#727272</color>
+    <color name="colorIcons">#FFFFFF</color>
+    <color name="colorDivider">#B6B6B6</color>
+    <color name="colorOrangeDark">#FF5722</color>
+    <color name="colorRedDark">#f11409</color>
+    <color name="colorOrangeLight">#FF5252</color>
+    <color name="colorOrange">#FF9800</color>
+    <color name="colorBlack">#ff000000</color>
+    <color name="colorBlackLight">#5f000000</color>
+    <color name="colorCreatedOfflineLighter">#1f636363</color>
+    <color name="colorBlackLightCustomToast">#7f000000</color>
+    <color name="colorBlackOpc">#10000000</color>
+    <color name="colorPinkDark">#E91E63</color>
+    <color name="colorPinkLight">#F06898</color>
+    <color name="colorPinkVeryLight">#FCDCE8</color>
+    <color name="colorGreenVeryDark">#00C853</color>
+    <color name="colorGrayStatus">#20000000</color>
+    <color name="colorGray2">#888888</color>
+
+    <color name="colorGrayShadow">#20000000</color>
+    <color name="colorGrayDark">#636363</color>
+    <color name="colorGrayDarker">#607D8B</color>
+    <color name="colorGrayDarkerBar">#455A64</color>
+    <color name="colorHanBlue">#446CCF</color>
+    <color name="colorJelly">#DA614E</color>
+    <color name="colorLightSeaGreen">#20B2AA</color>
+    <color name="colorMetallic">#0A7E8C</color>
+    <color name="colorBeauBlue">#8fBCD4E6</color>
+    <color name="colorCeladionGreen">#ACE1AF</color>
+    <color name="colorgreentrans">#906FAD9D</color>
+    <color name="colorPearl">#88D8C0</color>
+
+    <color name="colorYellow">#EEFF41</color>
+    <color name="colorCyan">#00FFFF</color>
+
+    <!-- new app-->
+
+    <color name="black">#ff000000</color>
+
+    <color name="gray">#666666</color>
+    <color name="dialog_title">#ffff0000</color>
+    <color name="common_background">#f5f3f0</color>
+    <color name="txt_color_gray_3">#cbc4c6</color>
+    <color name="pink">#ff5d65</color>
+    <color name="brown">#cccccc</color>
+    <color name="pale_pink">#cbc4c6</color>
+    <color name="divider">#e8e3e3</color>
+    <color name="tabcolor">#6e686a</color>
+    <!-- [begin]crop -->
+
+    <color name="crop_bg">#D5D5D5</color>
+
+    <color name="crop__button_bar">#f3f3f3</color>
+    <color name="crop__button_text">#666666</color>
+    <color name="crop__selector_pressed">#1a000000</color>
+    <color name="crop__selector_focused">#77000000</color>
+    <!-- [end]crop -->
+
+    <color name="actionLikeBg">#e74c3c</color>
+    <color name="actionFollowBg">#2196F3</color>
+    <color name="actionMentionBg">#FF5252</color>
+    <color name="actionCommentBg">#03C03C</color>
+
+
+    <color name="colorSpanSearch">@color/colorAccent</color>
+
+    <!-- Attachements -->
+
+    <color name="colorAttachVideo">#D33632</color>
+    <color name="colorAttachGalleryStart">#B03CC4</color>
+    <color name="colorAttachGalleryEnd">#871E92</color>
+
+    <color name="colorAttachDocStart">#40409E</color>
+    <color name="colorAttachDocEnd">#4C4EC1</color>
+
+    <color name="colorAttachAudioStart">#137ECF</color>
+    <color name="colorAttachAudioEnd">#1591E5</color>
+    <!--holders -->
+    <color name="colorBgHolderGray">#DBE2E5</color>
+    <color name="colorBgHolderGroupGreen">#75C78A</color>
+    <color name="colorBgHolderUserGreen">#63B4AA</color>
+    <!--holders colors-->
+    <color name="colorMessageBackground">#ece5dd</color>
+    <color name="colorGrayTransparent">#20000000</color>
+    <color name="colorGreenFlow">#80cbc4</color>
+    <color name="colorGreenDeep">#009688</color>
+    <color name="colorGreenProgressBars">#25d366</color>
+    <color name="colorGreenLighter">#6f0EC654</color>
+
+    <!--end holders colors-->
+
+
+    <color name="colorMsgBg">#ece5dd</color>
+    <color name="colorUnSelected">#E6E6E6</color>
+    <color name="colorUnSelectedMedia">#636363</color>
+
+
+    <color name="colorSea">#009ea5</color>
+    <color name="colorGreenDark">#00E676</color>
+    <color name="colorBanana">#f4f4dd</color>
+    <color name="colorGray3">#B6B6B6</color>
+    <color name="colorGray4">#DADADA</color>
+
+    <color name="colorMaize">#f7c14b</color>
+
+
+    <color name="meroon">#CC3062</color>
+    <color name="royalred">#f17474</color>
+    <color name="black_trans_basi">#5f5f5f</color>
+
+    <color name="piechart_color1">#3b7afd</color>
+    <color name="piechart_color2">#1da5b5</color>
+    <color name="piechart_color3">#0ab85f</color>
+    <color name="piechart_color4">#a461a4</color>
+
+
+    <color name="colorsnackbar_default">#323232</color>
+
 </resources>

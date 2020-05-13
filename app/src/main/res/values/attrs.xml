@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CardGameEditText">
+
+        <attr name="fontName" format="enum">
+            <enum name="Muli_Regular" value="1" />
+            <enum name="TheBomb" value="2"/>
+            <enum name="KingOfPirateBold" value="3"/>
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="CardGameTextView">
+
+        <attr name="textfontName" format="enum">
+            <enum name="Muli_Regular" value="1" />
+            <enum name="TheBomb" value="2"/>
+            <enum name="KingOfPirateBold" value="3"/>
+        </attr>
+
+    </declare-styleable>
+
+
+</resources>
